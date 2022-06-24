@@ -67,7 +67,7 @@ void DelMin(queueEl* queue, const size_t uCount, size_t& queueSize, int& countOp
 void shiftUp(queueEl* queue, const size_t uCount, const size_t queueSize, size_t index, int& countOperation)
 {
 	countOperation++;
-	if (index == 0)  // вышли на вершину
+	if (index == 0)  // РІС‹С€Р»Рё РЅР° РІРµСЂС€РёРЅСѓ
 		return;
 	countOperation++;
 	size_t parentIndex = index / 2;
@@ -83,16 +83,16 @@ void shiftUp(queueEl* queue, const size_t uCount, const size_t queueSize, size_t
 void shiftDown(queueEl* queue, const size_t uCount, const size_t queueSize, size_t index, int& countOperation) {
 	countOperation += 2;
 	size_t leftIndex = 2 * index;
-	if (leftIndex > queueSize)		// даже левого потомка нет, конец
+	if (leftIndex > queueSize)		// РґР°Р¶Рµ Р»РµРІРѕРіРѕ РїРѕС‚РѕРјРєР° РЅРµС‚, РєРѕРЅРµС†
 		return;
 	countOperation += 2;
 	size_t rightIndex = 2 * index + 1;
 	size_t newIndex;
-	if (rightIndex > queueSize) {	// Есть только левый потомок
+	if (rightIndex > queueSize) {	// Р•СЃС‚СЊ С‚РѕР»СЊРєРѕ Р»РµРІС‹Р№ РїРѕС‚РѕРјРѕРє
 		countOperation++;
 		newIndex = leftIndex;
 	}
-	else {							// есть два индекса
+	else {							// РµСЃС‚СЊ РґРІР° РёРЅРґРµРєСЃР°
 		countOperation += 2;
 		if (queue[rightIndex].weight > queue[leftIndex].weight)
 			newIndex = leftIndex; else newIndex = rightIndex;
@@ -109,7 +109,7 @@ void shiftDown(queueEl* queue, const size_t uCount, const size_t queueSize, size
 void branchBoundWithQueue(int** matrix, const size_t size, listArc* list,
 	const size_t uCount, int*& result, int& record, int& countOperation) 
 {
-	//найти случайный цикл для оценки
+	//РЅР°Р№С‚Рё СЃР»СѓС‡Р°Р№РЅС‹Р№ С†РёРєР» РґР»СЏ РѕС†РµРЅРєРё
 	int* temp = new int[size];
 	countOperation += size;
 	for (size_t i = 0; i < size; i++)
@@ -136,10 +136,10 @@ void branchBoundWithQueue(int** matrix, const size_t size, listArc* list,
 
 	countOperation += count;
 	listArc* p = list;
-	//проходим дуги
-	for (size_t j = 0; j < count - 1; j++)	// Первая дуга в цикле -- начинается в вершине 1
-											// не рассматриваем начало с последней дуги в списке, у которой начало в вершине 1
-											// так как иначе не сможем вернуться в вершину 1 и завершить цикл
+	//РїСЂРѕС…РѕРґРёРј РґСѓРіРё
+	for (size_t j = 0; j < count - 1; j++)	// РџРµСЂРІР°СЏ РґСѓРіР° РІ С†РёРєР»Рµ -- РЅР°С‡РёРЅР°РµС‚СЃСЏ РІ РІРµСЂС€РёРЅРµ 1
+											// РЅРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРј РЅР°С‡Р°Р»Рѕ СЃ РїРѕСЃР»РµРґРЅРµР№ РґСѓРіРё РІ СЃРїРёСЃРєРµ, Сѓ РєРѕС‚РѕСЂРѕР№ РЅР°С‡Р°Р»Рѕ РІ РІРµСЂС€РёРЅРµ 1
+											// С‚Р°Рє РєР°Рє РёРЅР°С‡Рµ РЅРµ СЃРјРѕР¶РµРј РІРµСЂРЅСѓС‚СЊСЃСЏ РІ РІРµСЂС€РёРЅСѓ 1 Рё Р·Р°РІРµСЂС€РёС‚СЊ С†РёРєР»
 	{
 		queueEl t;
 		t.list = new listArc;
@@ -169,7 +169,7 @@ void branchBoundWithQueue(int** matrix, const size_t size, listArc* list,
 void branchBoundWithQueue(int** matrix, listArc* list, listArc* resultList, const size_t size,
 	const size_t uCount, const size_t countInResult, int*& result, int& record, int& countOperation)
 {
-	// разбиение на новые ветви
+	// СЂР°Р·Р±РёРµРЅРёРµ РЅР° РЅРѕРІС‹Рµ РІРµС‚РІРё
 	listArc* q = resultList;
 	size_t count = 0;
 	while (q && q->next) {
@@ -177,30 +177,30 @@ void branchBoundWithQueue(int** matrix, listArc* list, listArc* resultList, cons
 		count++;
 	}
 	countOperation += 2*countInResult;
-	int start = q->end; // вершина, для которой ищем, как добавить новые дуги
+	int start = q->end; // РІРµСЂС€РёРЅР°, РґР»СЏ РєРѕС‚РѕСЂРѕР№ РёС‰РµРј, РєР°Рє РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Рµ РґСѓРіРё
 	int blok = q->start;
 
 	countOperation++;
 	if (blok != 1)
-		deleteVertexFromList(list, blok);	// не рассматривать уже добавленную дугу
+		deleteVertexFromList(list, blok);	// РЅРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ СѓР¶Рµ РґРѕР±Р°РІР»РµРЅРЅСѓСЋ РґСѓРіСѓ
 
 	countOperation += 2;
-	if (countInResult == size && start == 1)  // Найден какой-то путь
+	if (countInResult == size && start == 1)  // РќР°Р№РґРµРЅ РєР°РєРѕР№-С‚Рѕ РїСѓС‚СЊ
 	{
-		// проверка, является ли найденный путь лучше
+		// РїСЂРѕРІРµСЂРєР°, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РЅР°Р№РґРµРЅРЅС‹Р№ РїСѓС‚СЊ Р»СѓС‡С€Рµ
 		checkRecord(resultList, result, record, countOperation);
 		return;
 	}
 	countOperation++;
-	if (start == 1) {  //найден частичный путь (слишком рано вернулись)
+	if (start == 1) {  //РЅР°Р№РґРµРЅ С‡Р°СЃС‚РёС‡РЅС‹Р№ РїСѓС‚СЊ (СЃР»РёС€РєРѕРј СЂР°РЅРѕ РІРµСЂРЅСѓР»РёСЃСЊ)
 		return;
 	}
 	countOperation++;
-	if (!list) {  // нет пути
+	if (!list) {  // РЅРµС‚ РїСѓС‚Рё
 		return;
 	}
 
-	// сравнение
+	// СЃСЂР°РІРЅРµРЅРёРµ
 	countOperation += 2;
 	if (countInResult < size / 3) {
 		if (averageBoundary(matrix, resultList, list, size, countOperation) > record)
@@ -215,7 +215,7 @@ void branchBoundWithQueue(int** matrix, listArc* list, listArc* resultList, cons
 	queueEl* queue = new queueEl[count];
 	size_t queueSize = 0;
 
-	// Добавлять новые ветки и менять имя дуги так, чтобы начало добавленной совпадало с концом предыдущей
+	// Р”РѕР±Р°РІР»СЏС‚СЊ РЅРѕРІС‹Рµ РІРµС‚РєРё Рё РјРµРЅСЏС‚СЊ РёРјСЏ РґСѓРіРё С‚Р°Рє, С‡С‚РѕР±С‹ РЅР°С‡Р°Р»Рѕ РґРѕР±Р°РІР»РµРЅРЅРѕР№ СЃРѕРІРїР°РґР°Р»Рѕ СЃ РєРѕРЅС†РѕРј РїСЂРµРґС‹РґСѓС‰РµР№
 	listArc* p = list;
 	while (p) {
 		if (p->start == start) {
@@ -260,7 +260,7 @@ void branchBoundWithQueue(int** matrix, listArc* list, listArc* resultList, cons
 	print(queue, uCount, queueSize);
 	std::cout << std::endl;
 
-	// рекурсивный вызов очереди
+	// СЂРµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹Р·РѕРІ РѕС‡РµСЂРµРґРё
 	while (queueSize > 0)
 	{
 		listArc* copyList = copy(list); 
