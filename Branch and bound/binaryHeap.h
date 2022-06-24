@@ -3,7 +3,7 @@
 
 struct queueEl {
 	listArc *list;
-	int weight;  // ключ - высчитываемая граница
+	int weight;  // РєР»СЋС‡ - РІС‹СЃС‡РёС‚С‹РІР°РµРјР°СЏ РіСЂР°РЅРёС†Р°
 };
 
 void insert(queueEl* queue, const size_t uCount, size_t &queueSize, queueEl elem, int& countOperation);
