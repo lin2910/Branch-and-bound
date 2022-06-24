@@ -9,16 +9,16 @@ void generateGeneralizedStrings(int** arr, int** list, const size_t* power, cons
 				if (isPath[i] == 1)
 					return;
 			}
-			// вызов функции которая считает мощность и запоминает рекорд.
+			// РІС‹Р·РѕРІ С„СѓРЅРєС†РёРё РєРѕС‚РѕСЂР°СЏ СЃС‡РёС‚Р°РµС‚ РјРѕС‰РЅРѕСЃС‚СЊ Рё Р·Р°РїРѕРјРёРЅР°РµС‚ СЂРµРєРѕСЂРґ.
 			howLong(arr, size, tempArr, result, record, countOperation);
 		}
 	}
 	else {
 		for (size_t i = 0; i < power[tempArr[n] - 1]; i++)
 		{
-			//н список смежности
-			// D  -- степень итой вершины
-			int m = list[tempArr[n]-1][i] - 1; // Итая вершина смежная с н 
+			//РЅ СЃРїРёСЃРѕРє СЃРјРµР¶РЅРѕСЃС‚Рё
+			// D  -- СЃС‚РµРїРµРЅСЊ РёС‚РѕР№ РІРµСЂС€РёРЅС‹
+			int m = list[tempArr[n]-1][i] - 1; // РС‚Р°СЏ РІРµСЂС€РёРЅР° СЃРјРµР¶РЅР°СЏ СЃ РЅ 
 			countOperation++;
 			if (isPath[m]) {
 				isPath[m] = false;
@@ -32,7 +32,7 @@ void generateGeneralizedStrings(int** arr, int** list, const size_t* power, cons
 	}
 }
 
-// Перестановки
+// РџРµСЂРµСЃС‚Р°РЅРѕРІРєРё
 void generate(int* arr, const size_t size, size_t n, size_t k) {
 	if (k == n - 1) {
 		for (size_t i = 0; i < size; i++)
