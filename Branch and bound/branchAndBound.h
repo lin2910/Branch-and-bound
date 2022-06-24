@@ -2,7 +2,7 @@
 #include <iostream>
 #include "arrays.h"
 
-// Метод ветвей и границ
+// РњРµС‚РѕРґ РІРµС‚РІРµР№ Рё РіСЂР°РЅРёС†
 
 struct listArc
 {
@@ -12,34 +12,34 @@ struct listArc
 	listArc *next = nullptr;
 };
 
-// Создание списка дуг в графе для работы в методе ветвей и границ
+// РЎРѕР·РґР°РЅРёРµ СЃРїРёСЃРєР° РґСѓРі РІ РіСЂР°С„Рµ РґР»СЏ СЂР°Р±РѕС‚С‹ РІ РјРµС‚РѕРґРµ РІРµС‚РІРµР№ Рё РіСЂР°РЅРёС†
 listArc* makeList(int** arr, const size_t size);
 
 void printList(listArc* list);
 
 void deleteList(listArc* list);
 
-// Удалить из списка дуг все дуги, в которые входит вершина с номером vertex
-// Номер вершин считается с единицы
+// РЈРґР°Р»РёС‚СЊ РёР· СЃРїРёСЃРєР° РґСѓРі РІСЃРµ РґСѓРіРё, РІ РєРѕС‚РѕСЂС‹Рµ РІС…РѕРґРёС‚ РІРµСЂС€РёРЅР° СЃ РЅРѕРјРµСЂРѕРј vertex
+// РќРѕРјРµСЂ РІРµСЂС€РёРЅ СЃС‡РёС‚Р°РµС‚СЃСЏ СЃ РµРґРёРЅРёС†С‹
 void deleteVertexFromList(listArc *& list, int vertex);
 
-// Удалить из списка первую дугу
+// РЈРґР°Р»РёС‚СЊ РёР· СЃРїРёСЃРєР° РїРµСЂРІСѓСЋ РґСѓРіСѓ
 void deleteFirstArc(listArc*& list);
 
-// Удалить из списка дуг дугу (start, end)
+// РЈРґР°Р»РёС‚СЊ РёР· СЃРїРёСЃРєР° РґСѓРі РґСѓРіСѓ (start, end)
 void deleteArcFromList(listArc*& list, int start, int end);
 
-// Добавить дугу в конец списка
+// Р”РѕР±Р°РІРёС‚СЊ РґСѓРіСѓ РІ РєРѕРЅРµС† СЃРїРёСЃРєР°
 void addArcToList(listArc*& list, int start, int end, int weight);
 
-// Создание копии списка дуг
+// РЎРѕР·РґР°РЅРёРµ РєРѕРїРёРё СЃРїРёСЃРєР° РґСѓРі
 listArc* copy(listArc* original);
 
-// Рассчет веса пути по дугам в списке
+// Р Р°СЃСЃС‡РµС‚ РІРµСЃР° РїСѓС‚Рё РїРѕ РґСѓРіР°Рј РІ СЃРїРёСЃРєРµ
 int weightList(listArc*& list, int& countOperation);
 
-// Нахождение какого-нибудь допустимого решения на графе
-// Через перестановки
+// РќР°С…РѕР¶РґРµРЅРёРµ РєР°РєРѕРіРѕ-РЅРёР±СѓРґСЊ РґРѕРїСѓСЃС‚РёРјРѕРіРѕ СЂРµС€РµРЅРёСЏ РЅР° РіСЂР°С„Рµ
+// Р§РµСЂРµР· РїРµСЂРµСЃС‚Р°РЅРѕРІРєРё
 void findSomeResult(int** matrix, const size_t size, int* inCover, int*& result, int& record, const size_t n, const size_t k, int& countOperation);
 
 void branchBound(int** matrix, const size_t size, listArc* list, int*& result, int& record, int& countOperation);
