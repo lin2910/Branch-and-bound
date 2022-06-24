@@ -3,7 +3,7 @@
 int get_number(const char* filename) {
 	assert(filename);
 	ifstream fin(filename);
-	if (!fin.is_open()) throw "Íå íàéäåí óêàçàííûé ôàéë";
+	if (!fin.is_open()) throw "ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ñ‹Ð¹ Ñ„Ð°Ð¹Ð»";
 	int n;
 	fin >> n;
 	fin.close();
@@ -14,7 +14,7 @@ int get_number(const char* filename) {
 int* get_array(const char* filename) {
 	assert(filename);
 	ifstream fin(filename);
-	if (!fin.is_open()) throw "Íå íàéäåí óêàçàííûé ôàéë";
+	if (!fin.is_open()) throw "ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ñ‹Ð¹ Ñ„Ð°Ð¹Ð»";
 
 	int* arr = new int[100];
 	int k;
@@ -33,7 +33,7 @@ int* get_array(const char* filename) {
 int* get_array(const char* filename, size_t& size) {
 	assert(filename);
 	ifstream fin(filename);
-	if (!fin.is_open()) throw "Íå íàéäåí óêàçàííûé ôàéë";
+	if (!fin.is_open()) throw "ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ñ‹Ð¹ Ñ„Ð°Ð¹Ð»";
 
 	int* arr = new int[100];
 	int k;
@@ -54,7 +54,7 @@ int** get_array(const char* filename, size_t& size, size_t& uCount)
 {
 	assert(filename);
 	ifstream fin(filename);
-	if (!fin.is_open()) throw "Íå íàéäåí óêàçàííûé ôàéë";
+	if (!fin.is_open()) throw "ÐÐµ Ð½Ð°Ð¹Ð´ÐµÐ½ ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ñ‹Ð¹ Ñ„Ð°Ð¹Ð»";
 
 	fin >> size >> uCount;
 
