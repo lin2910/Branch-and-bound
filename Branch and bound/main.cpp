@@ -23,7 +23,7 @@ int main(int argc, const char* argv[]) {
 
 			int** arr = get_array(InputFile, size, uCount);
 
-			//Создание списка смежности
+			//РЎРѕР·РґР°РЅРёРµ СЃРїРёСЃРєР° СЃРјРµР¶РЅРѕСЃС‚Рё
 			size_t* power = new size_t[size];
 			for (size_t i = 0; i < size; i++) {
 				power[i] = 0;
@@ -43,7 +43,7 @@ int main(int argc, const char* argv[]) {
 				delete[]isArc;
 			}
 
-			// Перебор обобщенных строк
+			// РџРµСЂРµР±РѕСЂ РѕР±РѕР±С‰РµРЅРЅС‹С… СЃС‚СЂРѕРє
 			bool* isPath = new bool[size];
 			int* temp = new int[size];
 			for (size_t i = 0; i < size; i++)
@@ -62,14 +62,14 @@ int main(int argc, const char* argv[]) {
 
 			clock_t start, stop;
 
-			//начало отсчета времени
+			//РЅР°С‡Р°Р»Рѕ РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 			start = clock();
 
 			generateGeneralizedStrings(arr, list, power, size, isPath, temp, result, record, size - 1, countOperation);
-			// конец отсчета времени
+			// РєРѕРЅРµС† РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 			stop = clock();
 
-			// количество секунд
+			// РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ
 			double secondsGeneralizedStrings = double(stop - start) / CLOCKS_PER_SEC;
 
 			put_array(OutputFile_r, sort(result, size), size);
@@ -84,7 +84,7 @@ int main(int argc, const char* argv[]) {
 				delete[]list[i];
 			delete[]list;
 
-			// Перебор перестановок
+			// РџРµСЂРµР±РѕСЂ РїРµСЂРµСЃС‚Р°РЅРѕРІРѕРє
 			isPath = new bool[size];
 			temp = new int[size];
 			for (size_t i = 0; i < size; i++)
@@ -113,15 +113,15 @@ int main(int argc, const char* argv[]) {
 			record = INT_MAX;
 			countOperation = 0;
 
-			//начало отсчета времени
+			//РЅР°С‡Р°Р»Рѕ РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 			start = clock();
 
 			generatePermutations(arr, size, temp, result, record, size, 0, countOperation);
 
-			// конец отсчета времени
+			// РєРѕРЅРµС† РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 			stop = clock();
 
-			// количество секунд
+			// РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ
 			double secondsPermutations = double(stop - start) / CLOCKS_PER_SEC;
 
 			put_array_in_end(OutputFile_r, sort(result, size), size);
@@ -132,7 +132,7 @@ int main(int argc, const char* argv[]) {
 			delete[]isPath;
 			delete[]temp;
 
-			// Метод ветвей и границ
+			// РњРµС‚РѕРґ РІРµС‚РІРµР№ Рё РіСЂР°РЅРёС†
 			result = new int[size];
 			for (size_t i = 0; i < size; i++) {
 				result[i] = 0;
@@ -142,15 +142,15 @@ int main(int argc, const char* argv[]) {
 			listArc* listForBAB = makeList(arr, size);
 			listArc* p = listForBAB;
 			countOperation = 0;
-			//начало отсчета времени
+			//РЅР°С‡Р°Р»Рѕ РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 			start = clock();
 
 			branchBound(arr, size, listForBAB, result, record, countOperation);
 
-			// конец отсчета времени
+			// РєРѕРЅРµС† РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 			stop = clock();
 
-			// количество секунд
+			// РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ
 			double secondsBranchBound = double(stop - start) / CLOCKS_PER_SEC;
 
 			put_array_in_end(OutputFile_r, sort(result, size), size);
@@ -161,7 +161,7 @@ int main(int argc, const char* argv[]) {
 			delete[]result;
 
 
-			// Метод ветвей и границ + очередь
+			// РњРµС‚РѕРґ РІРµС‚РІРµР№ Рё РіСЂР°РЅРёС† + РѕС‡РµСЂРµРґСЊ
 			result = new int[size];
 			for (size_t i = 0; i < size; i++) {
 				result[i] = 0;
@@ -170,15 +170,15 @@ int main(int argc, const char* argv[]) {
 
 			listForBAB = makeList(arr, size);
 			countOperation = 0;
-			//начало отсчета времени
+			//РЅР°С‡Р°Р»Рѕ РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 			start = clock();
 
 			branchBoundWithQueue(arr, size, listForBAB, uCount, result, record, countOperation);
 
-			// конец отсчета времени
+			// РєРѕРЅРµС† РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 			stop = clock();
 
-			// количество секунд
+			// РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ
 			double secondsBranchBoundWithQueue = double(stop - start) / CLOCKS_PER_SEC;
 
 			put_array_in_end(OutputFile_r, sort(result, size), size);
@@ -215,7 +215,7 @@ int main(int argc, const char* argv[]) {
 
 	int** arr = get_array(InputFile, size, uCount);
 
-	//Создание списка смежности
+	//РЎРѕР·РґР°РЅРёРµ СЃРїРёСЃРєР° СЃРјРµР¶РЅРѕСЃС‚Рё
 	size_t* power = new size_t[size];
 	for (size_t i = 0; i < size; i++) {
 		power[i] = 0;
@@ -235,7 +235,7 @@ int main(int argc, const char* argv[]) {
 		delete[]isArc;
 	}
 
-	// Перебор обобщенных строк
+	// РџРµСЂРµР±РѕСЂ РѕР±РѕР±С‰РµРЅРЅС‹С… СЃС‚СЂРѕРє
 	bool* isPath = new bool[size];
 	int* temp = new int[size];
 	for (size_t i = 0; i < size; i++)
@@ -254,14 +254,14 @@ int main(int argc, const char* argv[]) {
 
 	clock_t start, stop;
 
-	//начало отсчета времени
+	//РЅР°С‡Р°Р»Рѕ РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 	start = clock();
 
 	generateGeneralizedStrings(arr, list, power, size, isPath, temp, result, record, size - 1, countOperation);
-	// конец отсчета времени
+	// РєРѕРЅРµС† РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 	stop = clock();
 
-	// количество секунд
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ
 	double secondsGeneralizedStrings = double(stop - start) / CLOCKS_PER_SEC;
 
 	put_array(OutputFile_r, sort(result, size), size);
@@ -273,7 +273,7 @@ int main(int argc, const char* argv[]) {
 	delete[]isPath;
 	delete[]temp;
 
-	// Перебор перестановок
+	// РџРµСЂРµР±РѕСЂ РїРµСЂРµСЃС‚Р°РЅРѕРІРѕРє
 	isPath = new bool[size];
 	temp = new int[size];
 	for (size_t i = 0; i < size; i++)
@@ -302,15 +302,15 @@ int main(int argc, const char* argv[]) {
 	record = INT_MAX;
 	countOperation = 0;
 
-	//начало отсчета времени
+	//РЅР°С‡Р°Р»Рѕ РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 	start = clock();
 
 	generatePermutations(arr, size, temp, result, record, size, 0, countOperation);
 
-	// конец отсчета времени
+	// РєРѕРЅРµС† РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 	stop = clock();
 
-	// количество секунд
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ
 	double secondsPermutations = double(stop - start) / CLOCKS_PER_SEC;
 
 	put_array_in_end(OutputFile_r, sort(result, size), size);
@@ -321,7 +321,7 @@ int main(int argc, const char* argv[]) {
 	delete[]isPath;
 	delete[]temp;
 
-	// Метод ветвей и границ
+	// РњРµС‚РѕРґ РІРµС‚РІРµР№ Рё РіСЂР°РЅРёС†
 	result = new int[size];
 	for (size_t i = 0; i < size; i++) {
 		result[i] = 0;
@@ -330,15 +330,15 @@ int main(int argc, const char* argv[]) {
 
 	listArc* listForBAB = makeList(arr, size);
 	countOperation = 0;
-	//начало отсчета времени
+	//РЅР°С‡Р°Р»Рѕ РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 	start = clock();
 
 	branchBound(arr, size, listForBAB, result, record, countOperation);
 
-	// конец отсчета времени
+	// РєРѕРЅРµС† РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 	stop = clock();
 
-	// количество секунд
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ
 	double secondsBranchBound = double(stop - start) / CLOCKS_PER_SEC;
 
 	put_array_in_end(OutputFile_r, sort(result, size), size);
@@ -349,7 +349,7 @@ int main(int argc, const char* argv[]) {
 	delete[]result;
 
 
-	// Метод ветвей и границ + очередь
+	// РњРµС‚РѕРґ РІРµС‚РІРµР№ Рё РіСЂР°РЅРёС† + РѕС‡РµСЂРµРґСЊ
 	result = new int[size];
 	for (size_t i = 0; i < size; i++) {
 		result[i] = 0;
@@ -358,15 +358,15 @@ int main(int argc, const char* argv[]) {
 
 	listForBAB = makeList(arr, size);
 	countOperation = 0;
-	//начало отсчета времени
+	//РЅР°С‡Р°Р»Рѕ РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 	start = clock();
 
 	branchBoundWithQueue(arr, size, listForBAB, uCount, result, record, countOperation);
 
-	// конец отсчета времени
+	// РєРѕРЅРµС† РѕС‚СЃС‡РµС‚Р° РІСЂРµРјРµРЅРё
 	stop = clock();
 
-	// количество секунд
+	// РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ
 	double secondsBranchBoundWithQueue = double(stop - start) / CLOCKS_PER_SEC;
 
 
