@@ -2,12 +2,12 @@
 #include <iostream>
 #include "arrays.h"
 
-//перебор слов в заданном алфавите
+//РїРµСЂРµР±РѕСЂ СЃР»РѕРІ РІ Р·Р°РґР°РЅРЅРѕРј Р°Р»С„Р°РІРёС‚Рµ
 
 void generateGeneralizedStrings(int** arr, int** list, const size_t* power, const size_t size, bool* isPath, int* tempArr, int*& result, int& record, const size_t n, int& countOperation);
 
 
-// перебор перестановок
+// РїРµСЂРµР±РѕСЂ РїРµСЂРµСЃС‚Р°РЅРѕРІРѕРє
 void generatePermutations(int** matrix, const size_t size, int* inCover, int*& result, int& record, const size_t n, const size_t k, int& countOperation);
 
 void generate(int* arr, const size_t size, size_t n, size_t k = 0);
