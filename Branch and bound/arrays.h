@@ -7,12 +7,12 @@ void add(int*& arr, size_t size, size_t& size_cover, int toAdd, int& countOperat
 
 int* copy(const int* original, const size_t size);
 
-// Общие функции
+// РћР±С‰РёРµ С„СѓРЅРєС†РёРё
 
-// Проверка является ли найденная последовательность вершин циклом в графе
+// РџСЂРѕРІРµСЂРєР° СЏРІР»СЏРµС‚СЃСЏ Р»Рё РЅР°Р№РґРµРЅРЅР°СЏ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ РІРµСЂС€РёРЅ С†РёРєР»РѕРј РІ РіСЂР°С„Рµ
 bool isWay(int** matrix, const size_t size, int* inCover, int& countOperation);
 
-//Функция нахождения длины найденного цикла и сравнения ее с рекордным значением тут же
+//Р¤СѓРЅРєС†РёСЏ РЅР°С…РѕР¶РґРµРЅРёСЏ РґР»РёРЅС‹ РЅР°Р№РґРµРЅРЅРѕРіРѕ С†РёРєР»Р° Рё СЃСЂР°РІРЅРµРЅРёСЏ РµРµ СЃ СЂРµРєРѕСЂРґРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј С‚СѓС‚ Р¶Рµ
 void howLong(int** arr, const size_t size, int* way, int*& result, int& record, int& countOperation);
 
 int* sort(int* arr, const size_t size);
