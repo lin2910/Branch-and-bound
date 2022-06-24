@@ -194,7 +194,7 @@ void findSomeResult(int** matrix, const size_t size, int* inCover, int*& result,
 }
 
 void branchBound(int** matrix, const size_t size, listArc* list, int*& result, int& record, int& countOperation) {
-	//найти случайный цикл для оценки
+	//РЅР°Р№С‚Рё СЃР»СѓС‡Р°Р№РЅС‹Р№ С†РёРєР» РґР»СЏ РѕС†РµРЅРєРё
 	int* temp = new int[size];
 	countOperation += size;
 	for (size_t i = 0; i < size; i++)
@@ -219,10 +219,10 @@ void branchBound(int** matrix, const size_t size, listArc* list, int*& result, i
 	countOperation += count;
 	
 	listArc* resultList = new listArc;
-	//проходим дуги
-	for (size_t j = 0; j < count-1; j++)	// Первая дуга в цикле -- начинается в вершине 1
-											// не рассматриваем начало с последней дуги в списке, у которой начало в вершине 1
-											// так как иначе не сможем вернуться в вершину 1 и завершить цикл
+	//РїСЂРѕС…РѕРґРёРј РґСѓРіРё
+	for (size_t j = 0; j < count-1; j++)	// РџРµСЂРІР°СЏ РґСѓРіР° РІ С†РёРєР»Рµ -- РЅР°С‡РёРЅР°РµС‚СЃСЏ РІ РІРµСЂС€РёРЅРµ 1
+											// РЅРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРј РЅР°С‡Р°Р»Рѕ СЃ РїРѕСЃР»РµРґРЅРµР№ РґСѓРіРё РІ СЃРїРёСЃРєРµ, Сѓ РєРѕС‚РѕСЂРѕР№ РЅР°С‡Р°Р»Рѕ РІ РІРµСЂС€РёРЅРµ 1
+											// С‚Р°Рє РєР°Рє РёРЅР°С‡Рµ РЅРµ СЃРјРѕР¶РµРј РІРµСЂРЅСѓС‚СЊСЃСЏ РІ РІРµСЂС€РёРЅСѓ 1 Рё Р·Р°РІРµСЂС€РёС‚СЊ С†РёРєР»
 	{
 		addArcToList(resultList, list->start, list->end, list->weight);
 		countOperation += 7;
@@ -232,7 +232,7 @@ void branchBound(int** matrix, const size_t size, listArc* list, int*& result, i
 		list = list->next;
 		countOperation += 2;
 
-		// рекурсивный вызов 
+		// СЂРµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹Р·РѕРІ 
 		listArc* copyList = copy(list);
 		branchBound(matrix, copyList, resultList, size, 1, result, record, countOperation);
 		deleteList(copyList);
@@ -246,43 +246,43 @@ void branchBound(int** matrix, listArc* list, listArc* resultList, const size_t 
 	//std::cout << std::endl << std::endl;
 	//printList(resultList);
 	
-	// разбиение на новые ветви
+	// СЂР°Р·Р±РёРµРЅРёРµ РЅР° РЅРѕРІС‹Рµ РІРµС‚РІРё
 	listArc* q = resultList;
 	while (q && q->next)
 		q = q->next;
 	countOperation += countInResult;
-	int start =  q->end; // вершина, для которой ищем, как добавить новые дуги
+	int start =  q->end; // РІРµСЂС€РёРЅР°, РґР»СЏ РєРѕС‚РѕСЂРѕР№ РёС‰РµРј, РєР°Рє РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Рµ РґСѓРіРё
 	int blok = q->start;
 	
 	countOperation++;
 	if (blok != 1)
-		deleteVertexFromList(list, blok);	// не рассматривать уже добавленную дугу
+		deleteVertexFromList(list, blok);	// РЅРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°С‚СЊ СѓР¶Рµ РґРѕР±Р°РІР»РµРЅРЅСѓСЋ РґСѓРіСѓ
 	//printList(list);
 
 	countOperation += 2;
-	if (countInResult == size && start == 1)  // Найден какой-то путь
+	if (countInResult == size && start == 1)  // РќР°Р№РґРµРЅ РєР°РєРѕР№-С‚Рѕ РїСѓС‚СЊ
 	{
 		//std::cout << std::endl << "Way: " << std::endl;
 		//printList(resultList); std::cout << std::endl;
 
-		// проверка на то, является ли найденный путь лучше
+		// РїСЂРѕРІРµСЂРєР° РЅР° С‚Рѕ, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РЅР°Р№РґРµРЅРЅС‹Р№ РїСѓС‚СЊ Р»СѓС‡С€Рµ
 		checkRecord(resultList, result, record, countOperation);
 		return;
 	}
 	countOperation++;
-	if (start == 1) {  //найден частичный путь (слишком рано вернулись)
+	if (start == 1) {  //РЅР°Р№РґРµРЅ С‡Р°СЃС‚РёС‡РЅС‹Р№ РїСѓС‚СЊ (СЃР»РёС€РєРѕРј СЂР°РЅРѕ РІРµСЂРЅСѓР»РёСЃСЊ)
 		//std::cout << std::endl << "Short way: " << std::endl;
 		//printList(resultList); std::cout << std::endl;
 		return;
 	}
 	countOperation++;
-	if (!list) {  // нет пути
+	if (!list) {  // РЅРµС‚ РїСѓС‚Рё
 		//std::cout << std::endl << "No way: " << std::endl;
 		//printList(resultList); std::cout << std::endl;
 		return;
 	}
 
-	// сравнение
+	// СЃСЂР°РІРЅРµРЅРёРµ
 	countOperation += 2;
 	if (countInResult < size / 3) {
 		if (averageBoundary(matrix, resultList, list, size, countOperation) > record)
@@ -296,7 +296,7 @@ void branchBound(int** matrix, listArc* list, listArc* resultList, const size_t 
 
 	//listArc* quelle = new listArc;
 
-	// Добавлять новые ветки и менять имя дуги так, чтобы начало добавленной совпадало с концом предыдущей
+	// Р”РѕР±Р°РІР»СЏС‚СЊ РЅРѕРІС‹Рµ РІРµС‚РєРё Рё РјРµРЅСЏС‚СЊ РёРјСЏ РґСѓРіРё С‚Р°Рє, С‡С‚РѕР±С‹ РЅР°С‡Р°Р»Рѕ РґРѕР±Р°РІР»РµРЅРЅРѕР№ СЃРѕРІРїР°РґР°Р»Рѕ СЃ РєРѕРЅС†РѕРј РїСЂРµРґС‹РґСѓС‰РµР№
 	listArc* p = list;
 	while (p) {
 		if (p->start == start) {
@@ -342,7 +342,7 @@ void branchBound(int** matrix, listArc* list, listArc* resultList, const size_t 
 		countOperation++;
 	}
 
-	// рекурсивный вызов очереди
+	// СЂРµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹Р·РѕРІ РѕС‡РµСЂРµРґРё
 	//std::cout << std::endl << "res" << std::endl;
 	//printList(resultList);
 	//std::cout << "quelle" << std::endl;
